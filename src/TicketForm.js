@@ -1,42 +1,74 @@
 import React, { useState, useEffect } from "react";
+import TicketList from "./TicketList";
 
 
-export default function TicketForm()
+export default function TicketForm({ tickets, dispatch, editingTicket })
     {
+        const [title, setTitle] = useState("");
+        const [description, setDescription] = useState("");
+        const [priority, setPriority] = useState("1");
+        useEffect(() => {
+            if (editingTicket) {
+              setTitle(editingTicket.title);
+              setDescription(editingTicket.description);
+              setPriority(editingTicket.priority);
+            } else {
+              clearForm();
+            }
+          }, [editingTicket]);
         const priorityLabels = {
             1: "Low",
             2: "Medium",
             3: "High",
           };
           const clearForm = () => {
-            // setTitle("");
-            // setDescription("");
-            // setPriority("1");
+            setTitle("");
+            setDescription("");
+            setPriority("1");
           };
         
           const handleSubmit = (e) => {
             e.preventDefault();
-            alert("submit clicked")
+           
+           const ticketData = {
+            id: editingTicket ? editingTicket.id : new Date().toISOString(),
+            title,
+            description,
+            priority,
+          };
+          dispatch({
+            type : editingTicket ? "UPDATE_TICKETS" : "ADD_TICKETS",
+            payload : ticketData
+          })
+          clearForm();
+          }
+          
+          const handleCancel = (e) =>
+          {
+            dispatch({
+                type: "CLEAR_EDITING_TICKET",
+            })
+            clearForm();
           }
     return(
-
+<div>
         <form onSubmit={handleSubmit} className="ticket-form">
         <div>
           <label>Title</label>
           <input
             type="text"
-            // value={title}
+             value={title}
             className="form-input"
-           // onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
           ></input>
         </div>
         <div>
           <label>Description</label>
           <textarea
             type="text"
-            // value={description}
+             value={description}
             className="form-input"
-         //   onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => setDescription(e.target.value)}
           ></textarea>
         </div>
   
@@ -50,7 +82,7 @@ export default function TicketForm()
                 value={value}
                 // checked={priority === value}
                 className="priority-input"
-                // onChange={(e) => setPriority(e.target.value)}
+                 onChange={(e) => setPriority(e.target.value)}
               ></input>
               {label}
             </label>
@@ -61,11 +93,15 @@ export default function TicketForm()
           Submit
         </button>
   
-        
-          <button className="button" >
+        { editingTicket && (
+          <button className="button" onClick={handleCancel}>
             Cancel Edit
-          </button>
+          </button> )
+        }
       </form>
-  
+      
+      <TicketList tickets={tickets} dispatch={dispatch}></TicketList>
+
+  </div>
     )
 }

@@ -6,8 +6,9 @@ import MovieGrid from "./MovieGrid";
 import WatchList from "./WatchList";
 import './styles.css';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import TicketForm from './TicketForm';
+import ticketReducer from './TicketReducer';
 
 
 function App() {
@@ -26,6 +27,10 @@ function App() {
         : [...prev, movieId]
     );
   };
+  const initalTicket = {tickets: [],     editingTicket: null  };
+  const [state, dispatch] = useReducer(ticketReducer, initalTicket);
+
+  
   return (
     <div className ="container">
    <Header></Header>
@@ -39,7 +44,7 @@ function App() {
                 <Link to="/watchlist">WatchList</Link>
               </li>
               <li>
-                <Link to="/ticketform">WatchList</Link>
+                <Link to="/ticketform">Ticket form</Link>
               </li>
             </ul>
           </nav>
@@ -68,8 +73,8 @@ function App() {
             <Route
               path="/ticketform"
               element={
-                <TicketForm></TicketForm>
-              }
+                <TicketForm tickets={state.tickets} dispatch={dispatch} editingTicket={state.editingTicket}></TicketForm>
+                 }
             ></Route>
           </Routes>
         </Router>
