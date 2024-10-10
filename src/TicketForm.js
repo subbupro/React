@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import TicketList from "./TicketList";
 
 
-export default function TicketForm({ tickets, dispatch, editingTicket })
+export default function TicketForm({ tickets, dispatch, editingTicket, sortPreference  })
     {
         const [title, setTitle] = useState("");
         const [description, setDescription] = useState("");
@@ -100,7 +100,7 @@ export default function TicketForm({ tickets, dispatch, editingTicket })
         }
       </form>
      
-      <TicketList tickets={tickets} dispatch={dispatch}></TicketList>
+      <TicketList tickets={tickets} dispatch={dispatch} sortPreference={sortPreference}></TicketList>
 
   </div>
     )

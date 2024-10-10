@@ -34,11 +34,11 @@ function App() {
   if (state.sortPreference === "High to Low")
   {
    
-    state.tickets =state.tickets.sort((a,b) => b.priority.localeCompare(a));
+    state.tickets.sort((a,b) => b.priority.localeCompare(a));
   }
   else 
   {
-    state.tickets = state.tickets.sort((a,b) => a.priority.localeCompare(b));
+    state.tickets.sort((a,b) => a.priority.localeCompare(b));
   }
   return (
     <div className ="container">
@@ -82,7 +82,7 @@ function App() {
             <Route
               path="/ticketform"
               element={
-                <TicketForm tickets={state.tickets} dispatch={dispatch} editingTicket={state.editingTicket}></TicketForm>
+                <TicketForm tickets={state.tickets} dispatch={dispatch} editingTicket={state.editingTicket} sortPreference ={state.sortPreference}></TicketForm>
                  }
             ></Route>
           </Routes>
