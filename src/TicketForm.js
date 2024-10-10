@@ -99,7 +99,7 @@ export default function TicketForm({ tickets, dispatch, editingTicket })
           </button> )
         }
       </form>
-      
+     
       <TicketList tickets={tickets} dispatch={dispatch}></TicketList>
 
   </div>

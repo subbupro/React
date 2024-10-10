@@ -27,10 +27,19 @@ function App() {
         : [...prev, movieId]
     );
   };
-  const initalTicket = {tickets: [],     editingTicket: null  };
+  const initalTicket = {tickets: [],     editingTicket: null,  sortPreference: "High to Low"
+};
   const [state, dispatch] = useReducer(ticketReducer, initalTicket);
 
-  
+  if (state.sortPreference === "High to Low")
+  {
+   
+    state.tickets =state.tickets.sort((a,b) => b.priority.localeCompare(a));
+  }
+  else 
+  {
+    state.tickets = state.tickets.sort((a,b) => a.priority.localeCompare(b));
+  }
   return (
     <div className ="container">
    <Header></Header>
