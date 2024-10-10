@@ -7,6 +7,7 @@ import WatchList from "./WatchList";
 import './styles.css';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import TicketForm from './TicketForm';
 
 
 function App() {
@@ -37,6 +38,9 @@ function App() {
               <li>
                 <Link to="/watchlist">WatchList</Link>
               </li>
+              <li>
+                <Link to="/ticketform">WatchList</Link>
+              </li>
             </ul>
           </nav>
 
@@ -59,6 +63,12 @@ function App() {
                   movies={movies}
                    toggleWatchlist={toggleWatchlist}
                 />
+              }
+            ></Route>
+            <Route
+              path="/ticketform"
+              element={
+                <TicketForm></TicketForm>
               }
             ></Route>
           </Routes>
