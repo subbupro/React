@@ -80,7 +80,7 @@ export default function TicketForm({ tickets, dispatch, editingTicket })
               <input
                 type="radio"
                 value={value}
-                // checked={priority === value}
+                 checked={priority === value}
                 className="priority-input"
                  onChange={(e) => setPriority(e.target.value)}
               ></input>
