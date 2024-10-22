@@ -15,7 +15,19 @@ steps:
   inputs:
     versionSpec: '18.x'
   displayName: 'Install Node.js'
+- task: SonarCloudPrepare@3
+  inputs:
+    SonarCloud: 'sonarcloud'
+    organization: 'subbupro'
+    scannerMode: 'cli'
+    configMode: 'file'
+- task: SonarCloudAnalyze@3
+  inputs:
+    jdkversion: 'JAVA_HOME_17_X64'
 
+- task: SonarCloudPublish@3
+  inputs:
+    pollingTimeoutSec: '300'
 - task: ArchiveFiles@2
   displayName: 'Archive files'
   inputs:
