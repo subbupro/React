@@ -19,11 +19,12 @@ steps:
   inputs:
     SonarCloud: 'sonarcloud'
     organization: 'subbupro'
-    scannerMode: 'cli'
-    configMode: 'file'
-    cliProjectKey: subbupro
-    
+    scannerMode: 'dotnet'
+    projectKey: 'subbupro'
+    projectName: 'subbupro'
+
 - task: SonarCloudAnalyze@3
+
   
 - task: SonarCloudPublish@3
   inputs:
