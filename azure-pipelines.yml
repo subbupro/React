@@ -10,6 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+
 - task: NodeTool@0
   inputs:
     versionSpec: '18.x'
@@ -23,7 +24,10 @@ steps:
     archiveType: zip
     archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
     replaceExistingArchive: true
-
+- task: WhiteSource@21
+  inputs:
+    cwd: '$(System.DefaultWorkingDirectory)'
+    
 - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
   artifact: drop
 
