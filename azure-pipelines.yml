@@ -28,6 +28,17 @@ steps:
   inputs:
     cwd: '$(System.DefaultWorkingDirectory)'
     
+- task: Npm@1
+  displayName: npm run test
+  inputs:
+    command: custom
+    customCommand: run ci:unit
+- task: Npm@1
+  displayName: npm run cypress
+  inputs:
+    command: custom
+    customCommand: run ci:cypress
+
 - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
   artifact: drop
 
