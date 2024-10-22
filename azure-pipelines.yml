@@ -23,7 +23,7 @@ steps:
     scannerMode: 'cli'
     configMode: 'manual'
     cliProjectKey: 'subbupro'
-    cliProjectName: 'subbupro'
+    cliProjectName: 'React'
     cliSources: '.'
 
 - task: SonarCloudAnalyze@3
